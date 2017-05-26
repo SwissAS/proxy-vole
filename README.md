@@ -1,3 +1,4 @@
+![Project Logo](https://github.com/SwissAS/proxy_vole/blob/master/resources/misc/logo.png "Logo")
 # proxy_vole
 Java proxy detection library
 
