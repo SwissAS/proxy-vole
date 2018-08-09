@@ -26,9 +26,9 @@ final class DLLManager {
 	private static final class TempDLLFileFilter implements FileFilter {
 		public boolean accept(File pathname) {
 			String name = pathname.getName();
-			return pathname.isFile() && 
-				name.startsWith(TEMP_FILE_PREFIX) && 
-				name.endsWith(DLL_EXTENSION);
+			return name.startsWith(TEMP_FILE_PREFIX) && 
+				name.endsWith(DLL_EXTENSION) && 
+				pathname.isFile();
 		}
 	}
 
@@ -36,7 +36,7 @@ final class DLLManager {
 	
 	static final String TEMP_FILE_PREFIX = "proxy_vole";
 	static final String DLL_EXTENSION = ".dll";
-	static String LIB_NAME_BASE = "proxy_util_";
+	static final String LIB_NAME_BASE = "proxy_util_";
 	static final String DEFAULT_LIB_FOLDER = "lib";
 	
 	/*************************************************************************

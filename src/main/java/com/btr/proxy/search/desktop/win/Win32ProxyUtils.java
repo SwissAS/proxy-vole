@@ -2,6 +2,7 @@ package com.btr.proxy.search.desktop.win;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.Executors;
 
 /*****************************************************************************
  *  Defines the native methods used for windows to extract some system information.
@@ -35,7 +36,13 @@ public class Win32ProxyUtils {
 		try {
 			File libFile = DLLManager.findLibFile(); 
 			System.load(libFile.getAbsolutePath());
-			DLLManager.cleanupTempFiles();
+
+			// Do cleanup in a background thread
+			Executors.newSingleThreadExecutor().execute(new Runnable() {
+				public void run() {
+					DLLManager.cleanupTempFiles();
+				}
+			});
 		} catch (IOException e) {
 			throw new RuntimeException("Error loading dll"+e.getMessage(), e); 
 		} 
