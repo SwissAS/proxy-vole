@@ -20,8 +20,6 @@ import com.btr.proxy.util.ProxyUtil;
  ****************************************************************************/
 public class PacProxySelector extends ProxySelector {
 
-	private final boolean JAVAX_PARSER = ScriptAvailability.isJavaxScriptingAvailable();
-
 	// private static final String PAC_PROXY = "PROXY";
 	private static final String PAC_SOCKS = "SOCKS";
 	private static final String PAC_DIRECT = "DIRECT";
@@ -66,14 +64,18 @@ public class PacProxySelector extends ProxySelector {
 	
 	private void selectEngine(PacScriptSource pacSource) {
 		try {
-			if (this.JAVAX_PARSER) {
+			if (ScriptAvailability.isJavaxScriptingAvailable()) {
 				Logger.log(getClass(), LogLevel.INFO,
 						"Using javax.script JavaScript engine.");
 				this.pacScriptParser = new JavaxPacScriptParser(pacSource);
-			} else {
+			} else
+			if (ScriptAvailability.isRhinoScriptingAvailable()) {
 				Logger.log(getClass(), LogLevel.INFO,
 						"Using Rhino JavaScript engine.");
 				this.pacScriptParser = new RhinoPacScriptParser(pacSource);
+			} else {
+				Logger.log(getClass(), LogLevel.WARNING, "JavaScript engine not available. PAC not supported.");
+				this.pacScriptParser = new NoOpScriptParser();
 			}
 		} catch (Exception e) {
 			Logger.log(getClass(), LogLevel.ERROR, "PAC parser error.", e);

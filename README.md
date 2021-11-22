@@ -26,5 +26,4 @@ License:
 This project is released under BSD license (see LICENSE for details).
 
 Have fun
-
-	- Bernd Rosstauscher  
+ 

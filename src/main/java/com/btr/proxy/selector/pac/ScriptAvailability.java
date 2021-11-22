@@ -35,6 +35,21 @@ abstract class ScriptAvailability {
 
 		return engine != null;
 	}
+	
+	/*************************************************************************
+	 * Checks whether Apache Rhino JS Engine is available or not.
+	 * @return true if Rhino is available; false otherwise
+	 ************************************************************************/
+
+	public static boolean isRhinoScriptingAvailable() {
+		try {
+			Class.forName("org.mozilla.javascript.ScriptableObject");
+			return true;
+		} catch (ClassNotFoundException e) {
+			// Apache Rhino not available
+		}
+		return false;
+	}
 
 	/*************************************************************************
 	 * Constructor
@@ -43,4 +58,5 @@ abstract class ScriptAvailability {
 	ScriptAvailability() {
 		super();
 	}
+
 }

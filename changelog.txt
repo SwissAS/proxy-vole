@@ -5,7 +5,13 @@ This file contains the change log. The changes are marked with the following sym
 - for a removed feature
 * for a modified feature or a bugfix
 
-Current Repository Version
+20211122
+* Some minor fixes for Java 11+. Deactivate PAC features gracefully if no JS engine is available.
+* Updated compile and source targets to Java 8  
+* Updated junit dependency
+
+
+2013+
 * Preparing migration to Maven
 + We now support on Linux Gnome the dconf settings format
 * Fixed  issue 55 : Improved shExpMatch method
