@@ -126,6 +126,9 @@ public class PacProxySelector extends ProxySelector {
 			List<Proxy> proxies = new ArrayList<Proxy>();
 			String parseResult = this.pacScriptParser.evaluate(uri.toString(),
 					uri.getHost());
+			if (parseResult == null) {
+				return ProxyUtil.noProxyList();
+			}
 			String[] proxyDefinitions = parseResult.split("[;]");
 			for (String proxyDef : proxyDefinitions) {
 				if (proxyDef.trim().length() > 0) {
